@@ -20,6 +20,9 @@ node("maven") {
             git "${params.APP_GIT_URL}"
             // extract info from pom.xml
             def pom = readMavenPom file: "pom.xml"
+            sh "echo '======================================================'"
+            sh "ls -ltr ${WORKSPACE}/cicd/maven/settings.xml;cat ${WORKSPACE}/cicd/maven/settings.xml"
+            sh "exit 0"
             sh "${mvnCmd} clean package -DskipTests"
             // stash application template
             stash name: "app-template", includes: "${params.APP_TEMPLATE}"
